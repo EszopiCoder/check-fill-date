@@ -44,9 +44,14 @@ function calc() {
     if (dateDif < adjustedDaysEarly) {
       let tooEarly = adjustedDaysEarly - dateDif;
       let nextFill = addDays(lastFillDate,adjustedDaysEarly);
-      document.getElementById('result').innerHTML = 'Filling '+tooEarly+' days early<br>Next fill date: '+nextFill.toLocaleDateString('en-US');
+
+      document.getElementById('result').innerHTML = 'Filling '+tooEarly+' day(s) early';
+      document.getElementById('nextFill').style.display = 'block';
+      document.getElementById('nextFill').innerHTML = 'Last fill date: '+lastFillDate.toLocaleDateString('en-US')+' for '+daysSupply+' days<br>Next fill date: '+nextFill.toLocaleDateString('en-US')+' ['+document.getElementById('daysEarly').value+' day(s) early]';
     } else {
       document.getElementById('result').innerHTML = 'Filling 0 days early or less';
+      document.getElementById('nextFill').style.display = 'none';
+      document.getElementById('nextFill').innerHTML = '';
     }
   }
 }
@@ -63,12 +68,12 @@ function addDays(date, days) {
   return result;
 }
 /**
- * Copies days supply result and displays alert.
+ * Copies next fill date info and displays alert.
  * Triggered by onclick event.
  */
 function copyText() {
-  var result = document.getElementById('result').innerText
-  if (document.getElementById('result').innerText.length == 0) {
+  var result = document.getElementById('nextFill').innerText
+  if (document.getElementById('nextFill').innerText.length == 0) {
     alert('No text found');
   } else {
     navigator.clipboard.writeText(result);
