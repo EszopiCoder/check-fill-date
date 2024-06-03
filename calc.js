@@ -1,6 +1,15 @@
 // Set date to today
 document.getElementById('lastFillDate').valueAsDate = new Date();
-
+/**
+ * Run copyText() function if Ctrl+C is pressed
+ */
+document.addEventListener('keydown', (e) => {
+  // event.metaKey - pressed Command key on Macs
+  // event.ctrlKey - pressed Control key on Linux or Windows
+  if ((e.metaKey || e.ctrlKey) && e.code === 'KeyC') {
+    copyText();
+  }
+})
 /**
  * Shows/Hides custom days supply input.
  * Triggered by onchange event.
